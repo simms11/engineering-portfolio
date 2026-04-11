@@ -9,12 +9,9 @@ interface GitHubRepo {
     language: string | null;
 }
 
-// 1. Define your exact target repositories here
 const FEATURED_REPOS = [
     'nevis-search-api',
-
     'NeighborhoodWatchIntelligenceService',
-
     'Yapily-open-banking-api-spring'
 
 ];
@@ -22,7 +19,6 @@ const FEATURED_REPOS = [
 async function getFeaturedRepos(): Promise<GitHubRepo[]> {
     const username = 'simms11';
 
-    // 2. Fetch exactly these repos in parallel
     const fetchPromises = FEATURED_REPOS.map(repoName =>
         fetch(`https://api.github.com/repos/${username}/${repoName}`, {
             next: { revalidate: 3600 } // Refresh data every hour
