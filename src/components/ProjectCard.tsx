@@ -9,7 +9,7 @@ export default function ProjectCard({ name, description, html_url, language }: P
     return (
         <div className="p-6 bg-white border border-gray-200 rounded-xl shadow-sm hover:shadow-md transition-shadow flex flex-col h-full">
             <div className="flex-grow">
-                <h3 className="text-xl font-bold text-blue-600 hover:underline mb-2 truncate">
+                <h3 className="text-xl font-bold text-blue-600 hover:underline mb-2 break-words">
                     <a href={html_url} target="_blank" rel="noreferrer" title={name}>
                         {name}
                     </a>
