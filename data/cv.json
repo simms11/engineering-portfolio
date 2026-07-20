@@ -5,31 +5,46 @@
     "email": "simms1993@hotmail.co.uk",
     "phone": "+447435154493",
     "github": "https://github.com/simms11",
-    "summary": "Software Engineer experienced in building secure, high-availability systems across the full software development lifecycle (SDLC). Background in maintaining and modernising critical infrastructure for high-security government clients (National Crime Agency) and financial institutions (Yapily). Skilled in stabilising legacy Java environments and engineering secure API layers to support digital transformation. Focused on delivering high-availability backend solutions in strictly regulated sectors.",
-    "intro": "A disciplined and security-minded engineer dedicated to architecting resilient, high-availability systems that power critical infrastructure from concept to production."
+    "summary": "Backend Software Engineer specialising in secure, resilient Java systems for strictly regulated sectors. Track record of engineering cloud-native, event-driven services for a vetting platform, compliant API infrastructure for financial institutions (Yapily), and modernising mission-critical legacy platforms for high-security government clients (National Crime Agency). Proven ability to drive system-wide technical design, mentor junior engineers, and deliver robust Spring Boot microservices with a focus on defensive architecture, observability, and safe incremental delivery.",
+    "intro": "A disciplined, security-minded engineer who architects defensive, event-driven systems for regulated sectors, from vetting platforms to financial infrastructure, and drives technical design decisions from concept to production."
   },
   "skills": [
-    { "category": "Languages", "items": ["Java (8–24)", "Node.js", "Scala", "SQL"] },
-    { "category": "Frameworks", "items": ["Spring Boot 3", "Play Framework"] },
-    { "category": "Cloud & Infrastructure", "items": ["SNS", "Docker", "Kubernetes", "Jenkins", "GitLab CI"] },
-    { "category": "Data & Storage", "items": ["PostgreSQL", "Oracle", "MongoDB"] },
-    { "category": "Security & Domain", "items": ["Open Banking (PSD2)", "OAuth 2.0 / JWT", "REST API Design", "Microservices", "Monolith & Serverless Architecture"] },
+    { "category": "Languages", "items": ["Java (8–21)", "Node.js", "Scala", "SQL"] },
+    { "category": "Frameworks", "items": ["Spring Boot", "Spring Security", "Spring AOP", "Spring Boot Actuator", "Play Framework"] },
+    { "category": "Cloud & Infrastructure", "items": ["AWS (S3, SNS, SQS, Cognito, SAM)", "Docker", "Kubernetes", "ArgoCD", "Jenkins", "GitLab CI", "LocalStack", "Git"] },
+    { "category": "Data & Storage", "items": ["PostgreSQL", "Oracle", "MongoDB", "Liquibase", "JPA/Hibernate"] },
+    { "category": "APIs & Security", "items": ["Open Banking (PSD2)", "OAuth 2.0 / JWT", "REST API Design", "OpenAPI"] },
     { "category": "Testing & Quality", "items": ["JUnit", "Mockito", "WireMock", "Jest", "SonarQube"] }
   ],
   "experience": [
     {
+      "company": "Glue Reply",
+      "role": "Software Engineer",
+      "dates": "Apr 2026 – Present",
+      "location": "London",
+      "tech": ["Java", "Spring Boot", "AWS SDK v2 (S3, SNS, SQS, Cognito)", "LocalStack", "Testcontainers", "Liquibase", "JPA/Hibernate", "Spring Security", "JUnit 5", "Mockito"],
+      "highlights": [
+        "Backend engineer on a pre-launch programme replacing a legacy vetting and background-check platform, building Java microservices across the new multi-service architecture.",
+        "Cloud Storage Architecture: Built and architected a direct-to-S3 upload flow using presigned URLs, implementing the pattern across two microservices to securely store applicant documents and raw third-party background checks. Designed a write-then-verify status model that confirms uploads against S3 rather than trusting client-reported success, and extended LocalStack tooling to support local development against the flow.",
+        "Recipient Data Architecture: Leading the replacement of a live Cognito dependency for resolving bulk email recipients with a locally-maintained data model synchronised via SNS/SQS domain events across four microservices, removing a fragile cross-service call from the send path and identifying it as a hard prerequisite before the bulk email feature could safely ship.",
+        "Organisation Service Tagging: Built the end-to-end capability for staff to tag client organisations with specific services, covering the data model, API, and Cognito synchronisation.",
+        "Technical Design Authorship: Authored the technical specification for a document-management epic spanning two microservices, defining RBAC-scoped API contracts, IAM/encryption requirements, and how the storage layer should integrate with the platform's existing SNS event pipeline for downstream consistency.",
+        "System Design & Review: Authored and reviewed the technical design for a new cross-service communications and notifications system spanning 11 tickets and three microservices, identifying race conditions, missing duplicate-prevention safeguards, and data model gaps before implementation began."
+      ]
+    },
+    {
       "company": "Yapily",
       "role": "Software Engineer",
-      "dates": "Aug 2025 - February 2026",
+      "dates": "Aug 2025 – Feb 2026 (fixed-term contract)",
       "location": "London",
-      "tech": ["Java 8/24", "Spring Boot 3", "PostgreSQL", "Docker", "Kubernetes", "OpenAPI", "Grafana"],
+      "tech": ["Java 8/21", "Spring Boot", "PostgreSQL", "Docker", "Kubernetes", "OpenAPI", "Testcontainers", "Grafana"],
       "highlights": [
         "Member of the Core Engineering Team responsible for developing the platform's foundational services. Tasked with enforcing security and PSD2 compliance for a system serving 2,000+ financial institutions.",
-        "Regulatory Delivery (VoP): Engineered key features for the Verification of Payee service to meet the October 2025 EU Instant Payments Regulation. Implemented strict IBAN validation and Regex-based character normalisation.",
-        "Microservices Resilience: Enhanced fault tolerance for critical downstream dependencies by implementing exponential backoff to handle transient outages. Enforced an error masking strategy that maps internal failures (500) to generic dependency errors (424).",
-        "Unified Security Architecture: Contributed to the unification of access control logic across internal infrastructure and external Open Banking services using JWTs.",
-        "Scalability & Performance: Optimised core endpoints to support high-volume querying by implementing cursor-based pagination, dynamic filtering, and database indexing.",
-        "Infrastructure & CI/CD: Orchestrated continuous delivery via ArgoCD and Kubernetes. Leveraged Docker for containerisation, K8s port forwarding, and Grafana telemetry to visualise inter-service interactions."
+        "Regulatory Delivery (VoP): Engineered key features for the Verification of Payee (VoP) service, a payee verification layer mandated under the EU Instant Payments Regulation (Oct 2025) to combat authorised push payment fraud. Implemented strict IBAN validation and regex-based character normalisation to resolve naming discrepancies and ensure accurate compliance.",
+        "Microservices Resilience: Enhanced fault tolerance for critical downstream dependencies by implementing exponential backoff to handle transient outages, reducing tail latency and near-eliminating client-reported false failures on the VoP service. Enforced an error masking strategy that maps internal failures (500) to generic dependency errors (424), preventing the accidental exposure of backend infrastructure details.",
+        "Unified Security Architecture: Contributed to the unification of access control logic across internal infrastructure and external Open Banking services using JWTs, enforcing granular permissions and strict data governance to ensure secure data isolation.",
+        "Scalability & Performance: Took end-to-end ownership of a critical performance risk flagged by the Tech Lead: proposed and implemented cursor-based pagination, dynamic filtering, and database indexing on core endpoints, proactively preventing a latency outage before onboarding larger enterprise clients.",
+        "Infrastructure & CI/CD: Orchestrated continuous delivery via ArgoCD and Kubernetes to ensure safe, incremental rollouts. Leveraged Docker for containerisation, K8s port forwarding for local cluster access and debugging, and Grafana telemetry to visualise inter-service interactions and proactively resolve production bugs."
       ]
     },
     {
@@ -39,11 +54,11 @@
       "location": "London",
       "tech": ["Java 6/8", "Spring Boot", "Oracle DB", "JUnit", "Mockito", "WireMock", "JBoss", "GitLab", "SonarQube", "Swagger"],
       "highlights": [
-        "Backend Software Engineer for the National Crime Agency’s digital evidence platform, driving the development of modern microservices and the modernisation of critical legacy systems.",
-        "Microservices & API Development: Collaborated within a 5-person team to develop digital evidence capture REST APIs, documenting contracts with Swagger. Utilised Spring Boot Actuator and extended pre-existing Spring AOP pointcuts for a granular digital evidence audit trail.",
-        "Concurrent Engineering & Quality: Context-switched seamlessly between Java 8 microservices and the legacy Java 6 monolith. Ensured robust software quality through comprehensive testing and SonarQube metrics.",
-        "Technical Leadership: Mentored two junior developers while implementing feature flags for controlled deployments and Fuzzy Matching algorithms. Led sprint demos to align stakeholder expectations.",
-        "Legacy Modernisation: Transitioned to sole backend engineer for the monolith. Managed complex database schema migrations across multiple projects and led PI planning sessions."
+        "Backend Software Engineer for the National Crime Agency's digital evidence platform, driving the development of modern microservices and the modernisation of critical legacy systems.",
+        "Microservices & API Development: Collaborated within a 5-person team to develop the digital evidence capture REST APIs, documenting contracts with Swagger. Utilised Spring Boot Actuator for observability and took ownership of the auditing Non-Functional Requirement, extending pre-existing Spring AOP pointcuts to capture custom 'during-execution' states for a highly granular digital evidence audit trail.",
+        "Concurrent Engineering & Quality: Expanded scope to engineer new features across a dual-stack architecture, context-switching seamlessly between Java 8 microservices and the legacy Java 6 monolith. Maintained 85% test coverage through comprehensive unit and integration testing, verified via SonarQube metrics.",
+        "Technical Leadership: Mentored two junior developers through pair programming and architectural reviews, upskilling a frontend dev transitioning to backend. Influenced a product decision to replace rigid postcode matching with a fuzzy matching algorithm, clearing an evidence submission backlog for officers and eliminating manual postcode verification. Implemented feature flags to enable safe, controlled deployments.",
+        "Legacy Modernisation: Transitioned to sole backend engineer for the monolith. Managed complex database schema migrations across multiple projects and led PI planning sessions with the Product Owner and Test Manager to define technical roadmaps."
       ]
     },
     {
@@ -51,11 +66,11 @@
       "role": "Java Developer",
       "dates": "Oct 2021 – Feb 2022",
       "location": "London",
-      "tech": ["Java Spring Boot", "PostgreSQL", "Docker", "JaCoCo"],
+      "tech": ["Java", "Spring Boot", "PostgreSQL", "Docker", "JaCoCo"],
       "highlights": [
         "Contributed to the digitisation of the County Court platform for HM Courts & Tribunals Service.",
         "Digital Transformation: Refactored legacy REST APIs and resolved bugs for the court filing system, directly supporting the transition to digital services.",
-        "Quality Assurance: Validated API reliability using Postman and maintained high test coverage standards with JaCoCo to prevent regression during the modernisation process."
+        "Quality Assurance: Validated API reliability using Postman and maintained 80% test coverage standards with JaCoCo to prevent regression during the modernisation process."
       ]
     },
     {
@@ -63,13 +78,13 @@
       "role": "Senior Software Engineer",
       "dates": "Jun 2017 – Sep 2021",
       "location": "London",
-      "tech": ["Node.js", "AWS SAM", "Scala", "Java", "PostgreSQL", "MongoDB", "Oracle Middleware"],
+      "tech": ["Node.js", "AWS SAM", "PostgreSQL", "Docker", "Jest", "Scala", "Play Framework", "MongoDB", "Oracle Middleware"],
       "highlights": [
         "Promoted from Associate to Senior Software Engineer based on delivery excellence across Government and Investment Banking sectors.",
-        "Senior Software Engineer (Jun 2021 – Sep 2021): Contributed to the development of a Function-as-a-Service solution in Node.js using AWS SAM for the DWP's SMS notification service. Led the migration of legacy XML APIs to RESTful standards.",
-        "Analyst Software Engineer (Dec 2019 – Jun 2021): Delivered full-stack microservices on GOV.UK for the HMRC National Duty Repayment Centre, integrating with PEGA workflow systems.",
-        "Associate Software Engineer (Dec 2018 – Dec 2019): Maintained critical Home Office reporting systems and managed SIT/UAT deployments, coordinating daily workflows with offshore development teams.",
-        "Associate Software Engineer (Jun 2017 – Nov 2018): Directed a testing team of 6 for a BAE Systems defence programme. Supported Java microservices for the UBS eFX trading platform and acted as integration analyst for the Manchester University ERP migration."
+        "Senior Software Engineer (Jun 2021 – Sep 2021): Contributed to the development of a Function-as-a-Service solution in Node.js using AWS SAM for the DWP's SMS notification service. Led the migration of legacy XML APIs to RESTful standards, writing complex data migration scripts for PostgreSQL.",
+        "Analyst Software Engineer (Dec 2019 – Jun 2021): Delivered full-stack microservices on GOV.UK for the HMRC National Duty Repayment Centre, ensuring Government Design Standard compliance and integrating with PEGA workflow systems to streamline user journeys.",
+        "Associate Software Engineer (Dec 2018 – Dec 2019): Maintained critical Home Office reporting systems (Oracle Middleware, BI Publisher) and managed SIT/UAT deployments, coordinating daily workflows with offshore development teams.",
+        "Associate Software Engineer (Jun 2017 – Nov 2018): Directed a testing team of 6 for a BAE Systems defence programme; supported Java microservices for the UBS eFX trading platform and acted as integration analyst for the Manchester University ERP migration."
       ]
     }
   ],
