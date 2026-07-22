@@ -10,6 +10,7 @@ const baseProps = {
 };
 
 const demoUrl = 'https://neighborhood-watch-intelligence-ser.vercel.app';
+const apiDocsUrl = 'https://neighborhoodwatchintelligenceservice.onrender.com/api/docs';
 
 test('renders project details and no demo button when demoUrl is absent', () => {
     render(<ProjectCard {...baseProps} />);
@@ -18,6 +19,16 @@ test('renders project details and no demo button when demoUrl is absent', () => 
     expect(screen.getByText(baseProps.description)).toBeInTheDocument();
     expect(screen.getByText(/TypeScript/i)).toBeInTheDocument();
     expect(screen.queryByRole('button', { name: /live demo/i })).not.toBeInTheDocument();
+    expect(screen.queryByRole('link', { name: /api docs/i })).not.toBeInTheDocument();
+});
+
+test('shows an API Docs link that opens the docs URL in a new tab', () => {
+    render(<ProjectCard {...baseProps} apiDocsUrl={apiDocsUrl} />);
+
+    const link = screen.getByRole('link', { name: /api docs/i });
+    expect(link).toHaveAttribute('href', apiDocsUrl);
+    expect(link).toHaveAttribute('target', '_blank');
+    expect(link).toHaveAttribute('rel', 'noreferrer');
 });
 
 test('shows a Live Demo button when demoUrl is provided', () => {

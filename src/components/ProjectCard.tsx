@@ -8,9 +8,10 @@ interface ProjectCardProps {
     html_url: string;
     language: string;
     demoUrl?: string;
+    apiDocsUrl?: string;
 }
 
-export default function ProjectCard({ name, description, html_url, language, demoUrl }: ProjectCardProps) {
+export default function ProjectCard({ name, description, html_url, language, demoUrl, apiDocsUrl }: ProjectCardProps) {
     const [isDemoOpen, setIsDemoOpen] = useState(false);
     const [isIframeLoading, setIsIframeLoading] = useState(true);
 
@@ -76,25 +77,43 @@ export default function ProjectCard({ name, description, html_url, language, dem
                 </p>
             </div>
 
-            <div className="mt-auto pt-4 flex items-center justify-between gap-3">
+            <div className="mt-auto pt-4 flex flex-wrap items-center gap-3">
                 {language && (
                     <span className="text-xs font-mono font-semibold text-gray-500 uppercase tracking-wider bg-gray-100 px-2 py-1.5 rounded">
                         ● {language}
                     </span>
                 )}
 
-                {demoUrl && (
-                    <button
-                        ref={triggerRef}
-                        type="button"
-                        onClick={() => setIsDemoOpen(true)}
-                        className="inline-flex items-center gap-1.5 whitespace-nowrap text-xs font-semibold text-white bg-blue-600 hover:bg-blue-700 transition-colors px-3 py-2 rounded-md focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
-                    >
-                        <svg viewBox="0 0 20 20" fill="currentColor" className="w-3.5 h-3.5 shrink-0" aria-hidden="true">
-                            <path d="M10 3a1 1 0 000 2h3.586l-9.293 9.293a1 1 0 101.414 1.414L15 6.414V10a1 1 0 102 0V4a1 1 0 00-1-1h-6z" />
-                        </svg>
-                        Live Demo
-                    </button>
+                {(demoUrl || apiDocsUrl) && (
+                    <div className="flex flex-wrap items-center gap-2 ml-auto">
+                        {apiDocsUrl && (
+                            <a
+                                href={apiDocsUrl}
+                                target="_blank"
+                                rel="noreferrer"
+                                title={`${name} API documentation`}
+                                className="inline-flex items-center gap-1.5 whitespace-nowrap text-xs font-semibold text-blue-600 border border-blue-200 hover:bg-blue-50 transition-colors px-3 py-2 rounded-md focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
+                            >
+                                <svg viewBox="0 0 20 20" fill="currentColor" className="w-3.5 h-3.5 shrink-0" aria-hidden="true">
+                                    <path fillRule="evenodd" d="M4 4a2 2 0 012-2h5.586a1 1 0 01.707.293l3.414 3.414a1 1 0 01.293.707V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4zm2 6a1 1 0 100 2h6a1 1 0 100-2H6zm0 4a1 1 0 100 2h4a1 1 0 100-2H6z" clipRule="evenodd" />
+                                </svg>
+                                API Docs
+                            </a>
+                        )}
+                        {demoUrl && (
+                            <button
+                                ref={triggerRef}
+                                type="button"
+                                onClick={() => setIsDemoOpen(true)}
+                                className="inline-flex items-center gap-1.5 whitespace-nowrap text-xs font-semibold text-white bg-blue-600 hover:bg-blue-700 transition-colors px-3 py-2 rounded-md focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
+                            >
+                                <svg viewBox="0 0 20 20" fill="currentColor" className="w-3.5 h-3.5 shrink-0" aria-hidden="true">
+                                    <path d="M10 3a1 1 0 000 2h3.586l-9.293 9.293a1 1 0 101.414 1.414L15 6.414V10a1 1 0 102 0V4a1 1 0 00-1-1h-6z" />
+                                </svg>
+                                Live Demo
+                            </button>
+                        )}
+                    </div>
                 )}
             </div>
 

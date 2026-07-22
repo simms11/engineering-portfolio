@@ -20,6 +20,10 @@ const DEMO_URLS: Record<string, string> = {
     NeighborhoodWatchIntelligenceService: 'https://neighborhood-watch-intelligence-ser.vercel.app',
 };
 
+const API_DOCS_URLS: Record<string, string> = {
+    NeighborhoodWatchIntelligenceService: 'https://neighborhoodwatchintelligenceservice.onrender.com/api/docs',
+};
+
 async function getFeaturedRepos(): Promise<GitHubRepo[]> {
     const username = 'simms11';
 
@@ -57,6 +61,7 @@ export default async function ProjectsPage() {
                             html_url={repo.html_url}
                             language={repo.language || "N/A"}
                             demoUrl={DEMO_URLS[repo.name]}
+                            apiDocsUrl={API_DOCS_URLS[repo.name]}
                         />
                     ))}
                 </div>
