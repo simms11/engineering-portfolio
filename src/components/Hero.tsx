@@ -19,6 +19,10 @@ export default function Hero() {
                 <a href={personal.github} target="_blank" rel="noreferrer" className="hover:text-blue-600 transition-colors">
                     GitHub
                 </a>
+                <span>|</span>
+                <a href={personal.website} target="_blank" rel="noreferrer" className="hover:text-blue-600 transition-colors">
+                    Portfolio
+                </a>
             </div>
 
             {}
