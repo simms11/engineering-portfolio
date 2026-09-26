@@ -5,16 +5,16 @@
     "email": "simms1993@hotmail.co.uk",
     "github": "https://github.com/simms11",
     "website": "https://alsahidsimms.vercel.app/",
-    "summary": "Backend Software Engineer with 6+ years building secure, event-driven Java microservices for regulated sectors, including financial services, government, and law enforcement. Authors technical designs spanning multiple services, closes security and performance risks before they reach production, and delivers under compliance mandates including PSD2 and the EU Instant Payments Regulation. Owns cross-service architecture end to end and mentors engineers.",
+    "summary": "Backend Software Engineer with 6+ years building secure Java microservices for regulated sectors, including financial services, government, and law enforcement, most recently designing event-driven systems on SNS/SQS. Authors technical designs spanning multiple services, closes security and performance risks before they ship, and delivers under compliance mandates including PSD2 and the EU Instant Payments Regulation. Has owned a microservice end to end and mentors engineers.",
     "intro": "A disciplined, security-minded engineer who architects defensive, event-driven systems for regulated sectors, from vetting platforms to financial infrastructure, and drives technical design decisions from concept to production."
   },
   "skills": [
     { "category": "Languages", "items": ["Java (8–21)", "SQL", "Scala", "Node.js"] },
-    { "category": "Frameworks", "items": ["Spring Boot", "Spring Security", "Spring AOP", "Spring Boot Actuator"] },
+    { "category": "Frameworks", "items": ["Spring Boot", "Spring Security", "Spring AOP", "Spring Boot Actuator", "Play Framework"] },
     { "category": "Messaging & Events", "items": ["AWS SNS/SQS", "event-driven microservice design", "webhook and polling integrations"] },
     { "category": "Cloud & Infrastructure", "items": ["AWS (S3, Cognito, SAM)", "Docker", "Kubernetes", "ArgoCD", "Jenkins", "GitLab CI", "LocalStack"] },
     { "category": "Data & Storage", "items": ["PostgreSQL", "Oracle", "MongoDB", "JPA/Hibernate", "Liquibase"] },
-    { "category": "APIs & Security", "items": ["Open Banking (PSD2)", "OAuth 2.0 / JWT", "OpenAPI/Swagger"] },
+    { "category": "APIs, Architecture & Security", "items": ["Open Banking (PSD2)", "OAuth 2.0 / JWT", "OpenAPI/Swagger", "microservices, monolith & serverless"] },
     { "category": "Testing & Observability", "items": ["JUnit 5", "Mockito", "WireMock", "Testcontainers", "SonarQube", "Grafana"] }
   ],
   "experience": [
@@ -23,14 +23,14 @@
       "role": "Software Engineer",
       "dates": "Apr 2026 – Present",
       "location": "London",
-      "tech": ["Java", "Spring Boot", "AWS SDK (S3, SNS, SQS, Cognito)", "LocalStack", "Testcontainers", "Liquibase", "JPA/Hibernate", "Spring Security", "JUnit 5", "Mockito"],
+      "tech": ["Java", "Spring Boot", "AWS SDK (S3, SNS, SQS, Cognito)", "LocalStack", "Testcontainers", "Liquibase", "JPA/Hibernate", "Spring Security"],
       "highlights": [
-        "Backend engineer on a pre-launch programme replacing a legacy vetting and background-check platform, building Java microservices across the new multi-service architecture. Worked closely with the Business Analyst to clarify requirements ahead of client sign-off.",
-        "Cloud Storage Architecture: Architected a direct-to-S3 upload flow using presigned URLs across two microservices, securely storing applicant documents and raw third-party background checks. Designed a write-then-verify status model that confirms uploads against S3 rather than trusting client-reported success, extending LocalStack tooling to support local development.",
-        "Third-Party Integration Security: Closed a credential-leak vulnerability where a redirect from the platform's screening provider (Fama) carried internal API credentials onto an unauthenticated, external S3 link. Fixed it by disabling automatic redirects, then pre-emptively applied the same protection to the e-signature integration (Signable) before the same leak could occur there.",
-        "Compliance Evidence Coverage: Resolved a gap where the screening provider's check reports were stored only when a check completed via webhook, leaving the polling/batch completion path with no retrievable evidence at all. Consolidated storage into a single completion listener shared across both paths, with retry-safe handling for failed downloads.",
-        "Automated Notifications & Reminders: Built the platform's automated notification capability: a configurable per-condition reminder-threshold model feeding an event-driven delivery framework across on-system and email channels, ordering rendering ahead of the deduplication claim so a redelivered message is safely retried rather than double-sent.",
-        "Scheduled Bulk Email Delivery: Built scheduled bulk email delivery with idempotent per-recipient dispatch and mid-batch cancellation, then found and fixed two production concurrency bugs: a crash-interrupted dispatch row that swallowed every retry, and a cancel/complete race that could overwrite a cancelled send back to completed. Both resolved with atomic conditional database updates.",
+        "Backend engineer on a pre-launch programme replacing a legacy vetting and background-check platform, owning the Communication service end to end and supporting the wider platform. Turned vague requirements into a defined backlog, driving client questions via the Business Analyst and authoring tickets, including a document-upload track the team built.",
+        "Cloud Storage Architecture: Architected a direct-to-S3 storage layer across two microservices: presigned-URL uploads for applicant and manually submitted check documents, and secure server-side storage for raw third-party background check reports. Designed a write-then-verify status model that confirms uploads against S3 rather than trusting client-reported success, extending LocalStack tooling to support local development.",
+        "Third-Party Integration Security: Closed a credential-leak vulnerability where a redirect from the platform's screening provider (Fama) carried internal API credentials onto an unauthenticated, external S3 link. Fixed it by disabling automatic redirects, then pre-emptively applied the same defensive principle (never send this credential to an unrelated host) to the e-signature integration (Signable) before the same class of leak could occur there.",
+        "Compliance Evidence Coverage: Resolved a gap where check reports were stored only on the webhook-triggered completion path, leaving providers that complete exclusively via polling, including the screening provider (Fama), with no retrievable evidence at all. Consolidated storage into a single completion listener shared across both paths, with retry-safe handling for failed downloads.",
+        "Automated Notifications & Reminders: Built the platform's automated notification capability: an event-driven delivery framework across on-system and email channels, ordering rendering ahead of the deduplication claim so a redelivered message is safely retried rather than double-sent, and a configurable per-condition reminder-threshold model built on the same idempotent-dispatch discipline.",
+        "Scheduled Bulk Email Delivery: Built scheduled bulk email delivery with idempotent per-recipient dispatch and mid-batch cancellation, then found and fixed two concurrency bugs during UAT: a crash-interrupted dispatch row that swallowed every retry, resolved by distinguishing a genuinely crashed row from a completed one, and a cancel/complete race that could overwrite a cancelled send back to completed, resolved with an atomic conditional database update.",
         "Technical Design Authorship: Authored the technical specification for a document-management epic spanning two microservices, defining RBAC-scoped API contracts, IAM/encryption requirements, and integration with the platform's existing SNS event pipeline. Also proposed the design for a cross-service communications and notifications system spanning 11 tickets and three microservices, identifying race conditions, missing duplicate-prevention safeguards, and data model gaps before implementation began."
       ]
     },
@@ -42,9 +42,9 @@
       "tech": ["Java 8/21", "Spring Boot", "PostgreSQL", "Docker", "Kubernetes", "OpenAPI", "Testcontainers", "Grafana"],
       "highlights": [
         "Core Engineering Team engineer on the platform's foundational services, enforcing security and PSD2 compliance for a system serving 2,000+ financial institutions.",
-        "Regulatory Delivery (VoP): Engineered key features for the Verification of Payee (VoP) service, a payee verification layer mandated under the EU Instant Payments Regulation (Oct 2025) to combat authorised push payment fraud. Implemented strict IBAN validation and regex-based character normalisation to resolve naming discrepancies and ensure accurate compliance.",
+        "Regulatory Delivery (VoP): Engineered key features for the Verification of Payee (VoP) service, a payee verification layer mandated under the EU Instant Payments Regulation (Oct 2025) to combat authorised push payment fraud. Implemented strict IBAN validation and regex-based character normalisation to resolve naming discrepancies.",
         "Microservices Resilience: Enhanced fault tolerance for critical downstream dependencies by implementing exponential backoff to handle transient outages, reducing tail latency and near-eliminating client-reported false failures on the VoP service. Enforced an error masking strategy that maps internal failures (500) to generic dependency errors (424), preventing the accidental exposure of backend infrastructure details.",
-        "Unified Security Architecture: Implemented scope-based access control using JWTs as part of unifying authorisation across internal infrastructure and external Open Banking services, enforcing per-client permissions and tenant data isolation.",
+        "Unified Security Architecture: Implemented scope-based access control using JWTs to unify authorisation across internal infrastructure and external Open Banking services, enforcing per-client permissions and tenant data isolation.",
         "Scalability & Performance: Took end-to-end ownership of a critical performance risk flagged by the Tech Lead: proposed and implemented cursor-based pagination, dynamic filtering, and database indexing on core endpoints, proactively preventing a latency outage before onboarding larger enterprise clients.",
         "Infrastructure & CI/CD: Orchestrated continuous delivery via ArgoCD and Kubernetes to ensure safe, incremental rollouts. Leveraged Docker for containerisation, K8s port forwarding for local cluster access and debugging, and Grafana telemetry to visualise inter-service interactions and proactively resolve production bugs."
       ]
@@ -54,7 +54,7 @@
       "role": "Java Developer",
       "dates": "Mar 2022 – Jul 2025",
       "location": "London",
-      "tech": ["Java 6/8", "Spring Boot", "Oracle DB", "JUnit", "Mockito", "WireMock", "JBoss", "GitLab", "SonarQube", "Swagger"],
+      "tech": ["Java 6/8", "Spring Boot", "Oracle", "JBoss", "JUnit", "Mockito", "WireMock", "GitLab", "SonarQube", "Swagger"],
       "highlights": [
         "Backend Software Engineer for the National Crime Agency's digital evidence platform, driving the development of modern microservices and the modernisation of critical legacy systems.",
         "Microservices & API Development: Collaborated within a 5-person team to develop the digital evidence capture REST APIs, documenting contracts with Swagger. Utilised Spring Boot Actuator for observability and took ownership of the auditing Non-Functional Requirement, extending pre-existing Spring AOP pointcuts to capture custom 'during-execution' states for a highly granular digital evidence audit trail.",
