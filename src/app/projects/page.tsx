@@ -12,12 +12,19 @@ interface GitHubRepo {
 const FEATURED_REPOS = [
     'nevis-search-api',
     'NeighborhoodWatchIntelligenceService',
-    'Yapily-open-banking-api-spring'
-
+    'Yapily-open-banking-api-spring',
+    'Melanated',
 ];
 
 const DEMO_URLS: Record<string, string> = {
     NeighborhoodWatchIntelligenceService: 'https://neighborhood-watch-intelligence-ser.vercel.app',
+    Melanated: 'https://melanated.vercel.app',
+};
+
+// Used when a repo has no description set on GitHub.
+const DESCRIPTION_FALLBACKS: Record<string, string> = {
+    Melanated:
+        'An online magazine with a Payload CMS editorial backend: Next.js 16, TypeScript, Postgres on Vercel, with tag-based revalidation, role-based editing, and scheduled publishing.',
 };
 
 const API_DOCS_URLS: Record<string, string> = {
@@ -57,7 +64,7 @@ export default async function ProjectsPage() {
                         <ProjectCard
                             key={repo.id}
                             name={repo.name}
-                            description={repo.description || "No description provided."}
+                            description={repo.description || DESCRIPTION_FALLBACKS[repo.name] || "No description provided."}
                             html_url={repo.html_url}
                             language={repo.language || "N/A"}
                             demoUrl={DEMO_URLS[repo.name]}

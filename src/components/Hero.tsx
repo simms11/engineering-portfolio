@@ -12,6 +12,8 @@ export default function Hero() {
             <div className="flex flex-wrap items-center gap-4 text-gray-600 mb-8 font-mono text-sm">
                 <span>📍 {personal.location}</span>
                 <span>|</span>
+                <span>🔒 {personal.clearance}</span>
+                <span>|</span>
                 <a href={`mailto:${personal.email}`} className="hover:text-blue-600 transition-colors">
                     {personal.email}
                 </a>
