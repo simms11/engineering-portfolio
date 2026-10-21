@@ -2,7 +2,6 @@ import Hero from '../../components/Hero';
 import ExperienceList from '../../components/ExperienceList';
 import SkillsList from '../../components/SkillsList';
 import Education from '../../components/Education';
-import Certifications from '../../components/Certifications';
 
 export default function CVPage() {
     return (
@@ -11,7 +10,6 @@ export default function CVPage() {
             <SkillsList />
             <ExperienceList />
             <Education />
-            <Certifications />
         </main>
     );
 }
