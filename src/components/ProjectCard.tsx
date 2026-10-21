@@ -21,12 +21,15 @@ export default function ProjectCard({ name, description, html_url, language, dem
     const titleId = `demo-title-${name}`;
 
     const closeDemo = () => setIsDemoOpen(false);
+    const openDemo = () => {
+        setIsIframeLoading(true);
+        setIsDemoOpen(true);
+    };
 
     useEffect(() => {
         if (!isDemoOpen) return;
 
-        setIsIframeLoading(true);
-
+        const trigger = triggerRef.current;
         const previousOverflow = document.body.style.overflow;
         document.body.style.overflow = 'hidden';
         closeRef.current?.focus();
@@ -60,7 +63,7 @@ export default function ProjectCard({ name, description, html_url, language, dem
         return () => {
             document.removeEventListener('keydown', handleKeyDown);
             document.body.style.overflow = previousOverflow;
-            triggerRef.current?.focus();
+            trigger?.focus();
         };
     }, [isDemoOpen]);
 
@@ -104,7 +107,7 @@ export default function ProjectCard({ name, description, html_url, language, dem
                             <button
                                 ref={triggerRef}
                                 type="button"
-                                onClick={() => setIsDemoOpen(true)}
+                                onClick={openDemo}
                                 className="inline-flex items-center gap-1.5 whitespace-nowrap text-xs font-semibold text-white bg-blue-600 hover:bg-blue-700 transition-colors px-3 py-2 rounded-md focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
                             >
                                 <svg viewBox="0 0 20 20" fill="currentColor" className="w-3.5 h-3.5 shrink-0" aria-hidden="true">
@@ -174,7 +177,7 @@ export default function ProjectCard({ name, description, html_url, language, dem
                                         <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
                                         <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z" />
                                     </svg>
-                                    Spinning up the live demo — this can take a few seconds if it's been idle.
+                                    Spinning up the live demo — this can take a few seconds if it&apos;s been idle.
                                 </div>
                             )}
                             <iframe
